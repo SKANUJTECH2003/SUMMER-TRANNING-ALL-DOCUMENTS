@@ -1,0 +1,41 @@
+[
+  {
+    "customer": "Aman Sharma",
+    "email": "aman@example.com",
+    "items": [
+      {
+        "product_id": "E101",
+        "name": "Laptop",
+        "price": 50000,
+        "qty": 2
+      }
+    ],
+    "total": 100000
+  },
+  {
+    "customer": "Aman Sharma",
+    "email": "aman@example.com",
+    "items": [
+      {
+        "product_id": "E101",
+        "name": "Laptop",
+        "price": 50000,
+        "qty": 2
+      }
+    ],
+    "total": 100000
+  },
+  {
+    "customer": "anuj kumar vishwakarma",
+    "email": "anuj@gmail.com",
+    "items": [
+      {
+        "product_id": "E101",
+        "name": "Laptop",
+        "price": 50000,
+        "qty": 5
+      }
+    ],
+    "total": 250000
+  }
+]

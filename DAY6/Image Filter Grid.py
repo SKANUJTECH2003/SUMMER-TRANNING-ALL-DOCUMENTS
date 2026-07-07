@@ -3,7 +3,13 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 
-img = Image.open("image1.jpg").convert("RGB")
+script_dir = Path(__file__).resolve().parent
+image_path = script_dir / "image1.jpg"
+
+if not image_path.exists():
+    raise FileNotFoundError(f"Image not found: {image_path}")
+
+img = Image.open(image_path).convert("RGB")
 arr = np.array(img, dtype=np.int16)
 mid_h, mid_w = arr.shape[0] // 2, arr.shape[1] // 2
 

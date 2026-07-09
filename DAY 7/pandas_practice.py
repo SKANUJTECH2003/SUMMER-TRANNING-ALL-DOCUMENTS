@@ -1,76 +1,41 @@
-import pandas as pd
-from pathlib import Path
+import matplotlib.pyplot as plt
+import numpy as np
 
-# Read the dataset
-csv_path = Path(__file__).with_name("netflix_dataset.csv")
-df = pd.read_csv(csv_path)
+# Coordinate geometry graph
+x = np.linspace(-5, 8, 200)
+y = 2 * x - 3
 
-print("=== Pandas Practice on Netflix Dataset ===")
+plt.figure(figsize=(7, 5))
+plt.plot(x, y, color='royalblue', linewidth=2, label='Line: y = 2x - 3')
 
-# 1. View first and last rows
-print("\n1. First 5 rows:")
-print(df.head())
+# Points on the graph
+points = {
+    'A': (1, -1),
+    'B': (3, 3),
+    'C': (5, 7),
+}
 
-print("\n2. Last 5 rows:")
-print(df.tail())
+for name, (px, py) in points.items():
+    plt.scatter(px, py, color='red', s=80)
+    plt.text(px + 0.1, py + 0.1, name, fontsize=11, color='darkred')
 
-# 2. Basic information about the DataFrame
-print("\n3. Shape of the DataFrame:")
-print(df.shape)
+# Draw connecting lines to form a triangle
+x_coords = [points['A'][0], points['B'][0], points['C'][0], points['A'][0]]
+y_coords = [points['A'][1], points['B'][1], points['C'][1], points['A'][1]]
+plt.plot(x_coords, y_coords, color='green', linestyle='--', linewidth=1.5)
 
-print("\n4. Column names:")
-print(df.columns.tolist())
-
-print("\n5. Data types:")
-print(df.dtypes)
-
-print("\n6. Summary statistics:")
-print(df.describe(include="all"))
-
-print("\n7. Information about the DataFrame:")
-print(df.info())
-
-# 3. Missing values
-print("\n8. Missing values count:")
-print(df.isnull().sum())
-
-# 4. Selecting columns
-print("\n9. Selected columns:")
-print(df[["title", "release_year", "views_millions"]].head())
-
-# 5. Filtering rows
-print("\n10. Movies released after 2020:")
-print(df[df["release_year"] >= 2020].head())
-
-# 6. Sorting values
-print("\n11. Sorted by views (highest first):")
-print(df.sort_values("views_millions", ascending=False).head())
-
-# 7. Grouping and aggregation
-print("\n12. Average views by genre:")
-print(df.groupby("genre")["views_millions"].mean().sort_values(ascending=False))
-
-# 8. Value counts
-print("\n13. Top countries:")
-print(df["country"].value_counts().head())
-
-# 9. Creating a new column
-print("\n14. Add a new column: views_per_minute")
-df["views_per_minute"] = df["views_millions"] / df["duration_min"]
-print(df[["title", "views_millions", "duration_min", "views_per_minute"]].head())
-
-# 10. Applying a function
-print("\n15. Rating category using apply():")
-df["rating_category"] = df["rating"].apply(lambda x: "High" if x >= 8 else "Low")
-print(df[["title", "rating", "rating_category"]].head())
-
-# 11. Renaming columns
-print("\n16. Rename a column:")
-renamed_df = df.rename(columns={"views_millions": "views_in_millions"})
-print(renamed_df[["title", "views_in_millions"]].head())
-
-# 12. Using query()
-print("\n17. Query example: release_year >= 2020 and views > 100")
-print(df.query("release_year >= 2020 and views_millions > 100").head())
-
-print("\nDone! You can now study each section one by one.")
+# Axes and formatting
+plt.axhline(0, color='black', linewidth=1)
+plt.axvline(0, color='black', linewidth=1)
+plt.grid(True, alpha=0.3)
+plt.axhline(0, color='black', linewidth=1)
+plt.axvline(0, color='black', linewidth=1)
+plt.title('Coordinate Geometry Graph')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.xlim(-5, 8)
+plt.ylim(-5, 10)
+plt.legend()
+plt.tight_layout()
+plt.savefig("coordinate_geometry_graph.png", dpi=300)
+plt.show()
